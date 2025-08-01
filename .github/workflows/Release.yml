@@ -19,28 +19,32 @@ jobs:
   build:
     strategy:
       matrix:
-        os-version: ["windows-latest", "macos-13", "macos-14"]
+        os-version: ["windows-latest", "macos-14"]
         python-version: ["3.11"]
         poetry-version: ["1.8.3"]
 
     runs-on: ${{ matrix.os-version }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: abatilo/actions-poetry@v2
+      - uses: abatilo/actions-poetry@v3
         with:
           poetry-version: ${{ matrix.poetry-version }}
 
       - name: Install dependencies
         run: |
           pip install numpy==1.26.4
-          pip install PyYAML pydantic ccrestoration loguru
+          pip install opencv-python==4.10.0.84
+
+          pip install ccrestoration
+
+          pip install PyYAML pydantic loguru
           pip install pre-commit scikit-image
           pip install pytest pytest-cov coverage
           pip install mypy ruff
@@ -57,7 +61,7 @@ jobs:
 
       - name: Build
         run: |
-          pip install pyinstaller~=6.3.0
+          pip install pyinstaller~=6.14.2
           make gen
           make gen-ts
           make pyinstaller
@@ -68,12 +72,6 @@ jobs:
           cd dist\Final2x-core
           7z a -r Final2x-core-${{ matrix.os-version }}.7z *
 
-      - name: zip-macos-x64
-        if: matrix.os-version == 'macos-13'
-        run: |
-          cd dist/Final2x-core
-          7z a -r Final2x-core-macos-x64.7z *
-
       - name: zip-macos-arm64
         if: matrix.os-version == 'macos-14'
         run: |
@@ -81,48 +79,33 @@ jobs:
           7z a -r Final2x-core-macos-arm64.7z *
 
       - name: upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           path: dist/Final2x-core/*.7z
 
-  build-wheel:
+  pypi:
     strategy:
       matrix:
         python-version: ["3.11"]
         poetry-version: ["1.8.3"]
 
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
 
-      - uses: abatilo/actions-poetry@v2
+      - uses: abatilo/actions-poetry@v3
         with:
           poetry-version: ${{ matrix.poetry-version }}
 
       - name: Build package
         run: |
           make build
-
-      - name: upload
-        uses: actions/upload-artifact@v3
-        with:
-          name: wheel
-          path: dist/*.whl
-
-  pypi:
-    needs: [build-wheel]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: wheel
-          path: dist
 
       - name: Publish a Python distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
@@ -133,7 +116,7 @@ jobs:
     needs: [setup, build, pypi]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           path: asset
 
