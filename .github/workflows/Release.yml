@@ -78,9 +78,33 @@ jobs:
       - name: upload
         uses: actions/upload-artifact@v4
         with:
+          name: Final2x-core-${{ matrix.os-version }}
           path: dist/Final2x-core/*.7z
 
+  github:
+    needs: [setup, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: asset
+
+      - name: Flatten asset directory
+        run: |
+          tree asset
+          mkdir dist
+          find asset -type f -print0 | xargs -0 -I{} cp "{}" dist/
+          cd dist && ls -l
+
+      - name: Create Release and Upload Release Asset
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ needs.setup.outputs.DATE }}
+          tag_name: ${{ needs.setup.outputs.DATE }}
+          files: dist/*
+
   pypi:
+    needs: [github]
     strategy:
       matrix:
         python-version: ["3.11"]
@@ -108,25 +132,3 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API }}
-
-  github:
-    needs: [setup, build, pypi]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v4
-        with:
-          path: asset
-
-      - name: dist
-        run: |
-          mkdir dist
-          tree asset
-          cp asset/artifact/* dist
-          cd dist && ls
-
-      - name: Create Release and Upload Release Asset
-        uses: softprops/action-gh-release@v2
-        with:
-          name: Release ${{ needs.setup.outputs.DATE }}
-          tag_name: ${{ needs.setup.outputs.DATE }}
-          files: dist/*
