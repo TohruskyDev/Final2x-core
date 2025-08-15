@@ -19,12 +19,15 @@ class CCRestoration:
     def __init__(self, config: SRConfig) -> None:
         self.config: SRConfig = config
 
+        tile = (128, 128) if self.config.use_tile else None
+
         PrintProgressLog().set(len(self.config.input_path), 1)
 
         self._SR_class: SRBaseModel = AutoModel.from_pretrained(
             pretrained_model_name=self.config.pretrained_model_name,
-            fp16=False,
             device=get_device(self.config.device),
+            fp16=False,
+            tile=tile,
             gh_proxy=self.config.gh_proxy,
         )
 
