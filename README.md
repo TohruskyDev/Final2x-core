@@ -3,17 +3,17 @@
 ![MacOS](https://img.shields.io/badge/Support-MacOS-blue?logo=Apple&style=flat-square)
 ![Windows](https://img.shields.io/badge/Support-Windows-blue?logo=Windows&style=flat-square)
 ![Linux](https://img.shields.io/badge/Support-Linux-blue?logo=Linux&style=flat-square)
-[![codecov](https://codecov.io/gh/Tohrusky/Final2x-core/branch/main/graph/badge.svg?token=B2TNKYN4O4)](https://codecov.io/gh/Tohrusky/Final2x-core)
-[![CI-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml)
-[![Release](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml)
+[![codecov](https://codecov.io/gh/EutropicAI/Final2x-core/branch/main/graph/badge.svg?token=B2TNKYN4O4)](https://codecov.io/gh/EutropicAI/Final2x-core)
+[![CI-test](https://github.com/EutropicAI/Final2x-core/actions/workflows/CI-test.yml/badge.svg)](https://github.com/EutropicAI/Final2x-core/actions/workflows/CI-test.yml)
+[![Release](https://github.com/EutropicAI/Final2x-core/actions/workflows/Release.yml/badge.svg)](https://github.com/EutropicAI/Final2x-core/actions/workflows/Release.yml)
 [![PyPI version](https://badge.fury.io/py/Final2x-core.svg)](https://badge.fury.io/py/Final2x-core)
-![GitHub](https://img.shields.io/github/license/Tohrusky/Final2x-core)
+![GitHub](https://img.shields.io/github/license/EutropicAI/Final2x-core)
 
-Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](https://github.com/Tohrusky/Final2x). If you have any questions, please raise an issue [in this repository](https://github.com/Tohrusky/Final2x).
+Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](https://github.com/EutropicAI/Final2x). If you have any questions, please raise an issue [in this repository](https://github.com/EutropicAI/Final2x).
 
 ### Install
 
-Download in [Release](https://github.com/Tohrusky/Final2x-core/releases) or use pip to install (Linux User).
+Download in [Release](https://github.com/EutropicAI/Final2x-core/releases) or use pip to install (Linux User).
 
 Make sure you have Python >= 3.9 and PyTorch >= 1.13 installed
 
@@ -52,7 +52,7 @@ The following references were used in the development of this project:
 
 After v3.0.0, ncnn will be deprecated, and the project will use ccrestoration(PyTorch) as the algorithm implementation.
 
-- [ccrestoration](https://github.com/TensoRaws/ccrestoration)
+- [ccrestoration](https://github.com/EutropicAI/ccrestoration)
 - [PyTorch](https://github.com/pytorch/pytorch)
 
 ---
