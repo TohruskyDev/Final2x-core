@@ -39,8 +39,8 @@ wheels = [
 ]
 
 [[package]]
-name = "ccrestoration"
-version = "0.2.2"
+name = "cccv"
+version = "0.0.4"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "einops" },
@@ -49,7 +49,7 @@ dependencies = [
     { name = "tenacity" },
 ]
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3b/4f/6772f4c54a2517e503b090a87a50cf0e86354f5b4f13b1f4f9e42228186a/ccrestoration-0.2.2-py3-none-any.whl", hash = "sha256:7cf089080f732d0ede368c4c6e49b235040a92590e55b32a14ddd69071be260b", size = 97887, upload-time = "2025-09-09T09:37:21.399Z" },
+    { url = "https://files.pythonhosted.org/packages/be/b3/36984e26080fd4f37566ada0e83832856a3cc80bce436f35cb5675c65dee/cccv-0.0.4-py3-none-any.whl", hash = "sha256:acbf7ef4f5a9ff9e38150a53638898864e1b3189e69da2d6f2a375a8f39eddfe", size = 107704, upload-time = "2025-09-27T00:18:45.054Z" },
 ]
 
 [[package]]
@@ -230,7 +230,7 @@ name = "final2x-core"
 version = "3.2.0"
 source = { editable = "." }
 dependencies = [
-    { name = "ccrestoration" },
+    { name = "cccv" },
     { name = "loguru" },
     { name = "pydantic" },
     { name = "pyyaml" },
@@ -238,7 +238,6 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "ccrestoration" },
     { name = "numpy" },
     { name = "opencv-python" },
     { name = "pyinstaller" },
@@ -262,7 +261,7 @@ typing = [
 
 [package.metadata]
 requires-dist = [
-    { name = "ccrestoration", specifier = "==0.2.2" },
+    { name = "cccv", specifier = "==0.0.4" },
     { name = "loguru" },
     { name = "pydantic" },
     { name = "pyyaml" },
@@ -270,7 +269,6 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "ccrestoration", specifier = "==0.2.2" },
     { name = "numpy", specifier = "~=1.26.4" },
     { name = "opencv-python", specifier = "~=4.10.0.84" },
     { name = "pyinstaller", specifier = "~=6.16.0" },
